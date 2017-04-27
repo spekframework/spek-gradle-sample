@@ -1,0 +1,42 @@
+group 'org.spekframework'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlin_version = '1.1.1'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M4'
+    }
+}
+
+
+
+apply plugin: 'org.junit.platform.gradle.plugin'
+apply plugin: 'java'
+apply plugin: 'kotlin'
+
+junitPlatform {
+    filters {
+        engines {
+            include 'spek'
+        }
+    }
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+    maven { url "http://dl.bintray.com/jetbrains/spek" }
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    testCompile 'org.jetbrains.kotlin:kotlin-test:1.1.0'
+    testCompile 'org.jetbrains.spek:spek-api:1.1.0'
+    testRuntime 'org.jetbrains.spek:spek-junit-platform-engine:1.1.0'
+}
